@@ -1,0 +1,19 @@
+dependencies:
+  nan: 2.14.2
+devDependencies:
+  tree-sitter-cli: 0.19.5
+lockfileVersion: 5.2
+packages:
+  /nan/2.14.2:
+    dev: false
+    resolution:
+      integrity: sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
+  /tree-sitter-cli/0.19.5:
+    dev: true
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-kRzKrUAwpDN9AjA3b0tPBwT1hd8N2oQvvvHup2OEsX6mdsSMLmAvR+NSqK9fe05JrRbVvG8mbteNUQsxlMQohQ==
+specifiers:
+  nan: ^2.14.2
+  tree-sitter-cli: ^0.19.5

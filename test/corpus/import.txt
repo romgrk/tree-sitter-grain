@@ -1,0 +1,34 @@
+============================================
+Imports
+============================================
+
+import defaultMember from "module-name"
+import * from "module-name"
+import { member } from "module-name"
+import { member1 , member2 } from "module-name"
+import { member1 , member2 as alias2 } from "module-name"
+import defaultMember, { member1, member2 as alias2 } from "module-name"
+
+----
+
+(program
+  (import_statement
+    (import_clause (identifier)) (string))
+  (import_statement
+    (import_clause (namespace_import)) (string))
+  (import_statement
+    (import_clause (named_imports (import_specifier (identifier)))) (string))
+  (import_statement
+    (import_clause (named_imports
+      (import_specifier (identifier))
+      (import_specifier (identifier))))
+    (string))
+  (import_statement
+    (import_clause (named_imports
+      (import_specifier (identifier))
+      (import_specifier (identifier) (identifier)))) (string))
+  (import_statement
+    (import_clause (identifier) (named_imports
+      (import_specifier (identifier))
+      (import_specifier (identifier) (identifier)))) (string))
+)

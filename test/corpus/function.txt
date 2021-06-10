@@ -1,0 +1,11 @@
+=========
+Functions
+=========
+
+export let length = (array) => {}
+
+---
+
+(source_file
+  (export_statement)
+)
