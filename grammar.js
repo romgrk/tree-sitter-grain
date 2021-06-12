@@ -38,6 +38,7 @@ module.exports = grammar({
     primitive: $ => choice(
       $.true,
       $.false,
+      $.void,
       $.number,
       $.string,
       $.char,
@@ -213,6 +214,7 @@ module.exports = grammar({
 
     true: $ => 'true',
     false: $ => 'false',
+    void: $ => 'void',
 
     number: $ => {
       const decimal_digits = /\d+/

@@ -9,6 +9,7 @@
 [
   (true)
   (false)
+  (void)
 ] @constant.builtin
 
 (comment) @comment
@@ -76,15 +77,15 @@
 ;   "||="
 ;   "??="
 ] @operator
- 
-; [
-;   "("
-;   ")"
-;   "["
-;   "]"
-;   "{"
-;   "}"
-; ]  @punctuation.bracket
+
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+]  @punctuation.bracket
 
 [
  "import"

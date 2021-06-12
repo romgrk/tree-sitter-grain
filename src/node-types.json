@@ -54,6 +54,10 @@
         {
           "type": "underscore",
           "named": true
+        },
+        {
+          "type": "void",
+          "named": true
         }
       ]
     }
@@ -131,6 +135,10 @@
         },
         {
           "type": "underscore",
+          "named": true
+        },
+        {
+          "type": "void",
           "named": true
         }
       ]
@@ -266,6 +274,10 @@
         {
           "type": "underscore",
           "named": true
+        },
+        {
+          "type": "void",
+          "named": true
         }
       ]
     }
@@ -324,6 +336,10 @@
         },
         {
           "type": "underscore",
+          "named": true
+        },
+        {
+          "type": "void",
           "named": true
         }
       ]
@@ -409,6 +425,10 @@
           {
             "type": "underscore",
             "named": true
+          },
+          {
+            "type": "void",
+            "named": true
           }
         ]
       }
@@ -492,6 +512,10 @@
         {
           "type": "underscore",
           "named": true
+        },
+        {
+          "type": "void",
+          "named": true
         }
       ]
     }
@@ -565,6 +589,10 @@
         },
         {
           "type": "underscore",
+          "named": true
+        },
+        {
+          "type": "void",
           "named": true
         }
       ]
@@ -668,6 +696,10 @@
   },
   {
     "type": "underscore",
+    "named": true
+  },
+  {
+    "type": "void",
     "named": true
   },
   {

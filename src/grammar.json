@@ -47,6 +47,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "void"
+        },
+        {
+          "type": "SYMBOL",
           "name": "number"
         },
         {
@@ -739,6 +743,10 @@
     "false": {
       "type": "STRING",
       "value": "false"
+    },
+    "void": {
+      "type": "STRING",
+      "value": "void"
     },
     "number": {
       "type": "TOKEN",
