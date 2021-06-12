@@ -17,6 +17,8 @@ module.exports = grammar({
   inline: $ => [
     $.statement,
     $.expression,
+    $.pattern,
+    $.primitive,
   ],
 
   rules: {
@@ -30,6 +32,10 @@ module.exports = grammar({
 
     expression: $ => choice(
       $.identifier,
+      $.primitive,
+    ),
+
+    primitive: $ => choice(
       $.true,
       $.false,
       $.number,
@@ -53,12 +59,14 @@ module.exports = grammar({
 
     // TODO: complete this
     pattern: $ => choice(
+      $.underscore,
       $.identifier,
-      seq(
-        '(',
-        commaSep1($.identifier),
-        ')',
-      )
+      $.primitive,
+      $.tuple_pattern,
+      $.array_pattern,
+      $.list_pattern,
+      $.record_pattern,
+      $.construct_pattern,
     ),
 
     // pattern :
@@ -77,6 +85,50 @@ module.exports = grammar({
     //   | type_id { Pat.construct ~loc:(symbol_rloc dyp) $1 [] }
     //   | lbrack patterns [comma ELLIPSIS any_or_var_pat {$3}]? rbrack { Pat.list ~loc:(symbol_rloc dyp) $2 $3 }
     //   | lbrack [ELLIPSIS any_or_var_pat {$2}]? rbrack { Pat.list ~loc:(symbol_rloc dyp) [] $2 }
+
+    tuple_pattern: $ => seq(
+      '(',
+      commaSep1($.pattern),
+      ')',
+    ),
+
+    array_pattern: $ => seq(
+      '[>',
+      commaSep($.pattern),
+      ']',
+    ),
+
+    list_pattern: $ => seq(
+      '[',
+      commaSep($.pattern),
+      ']',
+    ),
+
+    record_pattern: $ => seq(
+      '{',
+      commaSep1(choice(
+        $.pattern_alias,
+        $.pattern,
+      )),
+      '}',
+    ),
+
+    pattern_alias: $ => seq(
+      field('key', $.identifier),
+      ':',
+      field('value', $.pattern),
+    ),
+
+    construct_pattern: $ => seq(
+      $.type,
+      optional(seq(
+        '(',
+        commaSep1($.pattern),
+        ')',
+      )),
+    ),
+
+    underscore: $ => token('_'),
 
     //
     // Import declarations
@@ -146,6 +198,12 @@ module.exports = grammar({
     //
     // Primitives
     //
+
+    type: $ => {
+      const alpha = /[A-Z]/
+      const alphanumeric = /[^\x00-\x1F\s:;`"'@#.,|^&<=>+\-*/\\%?!~()\[\]{}\uFEFF\u2060\u200B\u00A0]|\\u[0-9a-fA-F]{4}|\\u\{[0-9a-fA-F]+\}/
+      return token(seq(alpha, repeat(alphanumeric)))
+    },
 
     identifier: $ => {
       const alpha = /[^\x00-\x1F\s0-9:;`"'@#.,|^&<=>+\-*/\\%?!~()\[\]{}\uFEFF\u2060\u200B\u00A0]|\\u[0-9a-fA-F]{4}|\\u\{[0-9a-fA-F]+\}/

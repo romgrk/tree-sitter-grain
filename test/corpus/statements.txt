@@ -34,24 +34,45 @@ import defaultMember, { member1, member2 as alias2 } from "module-name"
 )
 
 ============================================
-Assignments
+Let expression (simple)
 ============================================
 
 let x = true
 let firstNumber = 3, secondNumber = 4
-let (name, age, color) = user
-let (_, age, _) = user
 let mut y = 'c'
 let rec mut fn = "string"
 
 ----
 
 (program
-  (let_expr (pattern (identifier)) (true))
-  (let_expr (pattern (identifier)) (number)
-            (pattern (identifier)) (number))
-  (let_expr (pattern (identifier) (identifier) (identifier)) (identifier))
-  (let_expr (pattern (identifier) (identifier) (identifier)) (identifier))
-  (let_expr (pattern (identifier)) (char))
-  (let_expr (pattern (identifier)) (string))
+  (let_expr (identifier) (true))
+  (let_expr (identifier) (number)
+            (identifier) (number))
+  (let_expr (identifier) (char))
+  (let_expr (identifier) (string))
+)
+
+============================================
+Let expression (complex patterns)
+============================================
+
+let (name, age, _) = tuple
+let { x, y: someName, z: _ } = record
+let [one, two, _] = list
+let [> one, two, _] = array
+let Some(x) = option
+
+----
+
+(program
+  (let_expr (tuple_pattern (identifier) (identifier) (underscore)) (identifier))
+  (let_expr
+    (record_pattern
+      (identifier)
+      (pattern_alias (identifier) (identifier))
+      (pattern_alias (identifier) (underscore)))
+    (identifier))
+  (let_expr (list_pattern (identifier) (identifier) (underscore)) (identifier))
+  (let_expr (array_pattern (identifier) (identifier) (underscore)) (identifier))
+  (let_expr (construct_pattern (type) (identifier)) (identifier))
 )
