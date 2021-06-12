@@ -11,7 +11,7 @@
   (false)
 ] @constant.builtin
 
-; (comment) @comment
+(comment) @comment
 
 [
   (string)
@@ -29,8 +29,8 @@
 ;   "."
 ;   ","
 ; ] @punctuation.delimiter
-; 
-; [
+
+[
 ;   "-"
 ;   "--"
 ;   "-="
@@ -49,7 +49,7 @@
 ;   "<="
 ;   "<<"
 ;   "<<="
-;   "="
+  "="
 ;   "=="
 ;   "==="
 ;   "!"
@@ -75,8 +75,8 @@
 ;   "&&="
 ;   "||="
 ;   "??="
-; ] @operator
-; 
+] @operator
+ 
 ; [
 ;   "("
 ;   ")"

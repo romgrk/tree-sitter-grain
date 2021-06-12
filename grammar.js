@@ -5,6 +5,11 @@
 module.exports = grammar({
   name: 'grain',
 
+  extras: $ => [
+    $.comment,
+    /[\s\uFEFF\u2060\u200B\u00A0]/
+  ],
+
   supertypes: $ => [
     // $.statement,
   ],
@@ -31,6 +36,16 @@ module.exports = grammar({
       $.string,
       $.char,
     ),
+
+    // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
+    comment: $ => token(choice(
+      seq('//', /.*/),
+      seq(
+        '/*',
+        /[^*]*\*+([^/*][^*]*\*+)*/,
+        '/'
+      )
+    )),
 
     //
     // Patterns
