@@ -11,6 +11,7 @@ module.exports = grammar({
 
   inline: $ => [
     $.statement,
+    $.expression,
   ],
 
   rules: {
@@ -19,7 +20,48 @@ module.exports = grammar({
 
     statement: $ => choice(
       $.import_statement,
+      $.let_expr,
     ),
+
+    expression: $ => choice(
+      $.identifier,
+      $.true,
+      $.false,
+      $.number,
+      $.string,
+      $.char,
+    ),
+
+    //
+    // Patterns
+    //
+
+    // TODO: complete this
+    pattern: $ => choice(
+      $.identifier,
+      seq(
+        '(',
+        commaSep1($.identifier),
+        ')',
+      )
+    ),
+
+    // pattern :
+    //   | pattern colon typ { Pat.constraint_ ~loc:(symbol_rloc dyp) $1 $3 }
+    //   | UNDERSCORE { Pat.any ~loc:(symbol_rloc dyp) () }
+    //   | const { Pat.constant ~loc:(symbol_rloc dyp) $1 }
+    //   /* If the pattern uses an external ID, we know it's a constructor, not a variable */
+    //   | ext_constructor { Pat.construct ~loc:(symbol_rloc dyp) $1 [] }
+    //   | [ID | special_id | primitive] { Pat.var ~loc:(symbol_rloc dyp) (mkstr dyp $1) }
+    //   | lparen tuple_patterns rparen { Pat.tuple ~loc:(symbol_rloc dyp) $2 }
+    //   | lbrack rcaret patterns rbrack { Pat.array ~loc:(symbol_rloc dyp) $3 }
+    //   | lbrack rcaret rbrack { Pat.array ~loc:(symbol_rloc dyp) [] }
+    //   | lparen pattern rparen { $2 }
+    //   | lbrace record_patterns rbrace { Pat.record ~loc:(symbol_rloc dyp) $2 }
+    //   | type_id lparen patterns rparen { Pat.construct ~loc:(symbol_rloc dyp) $1 $3 }
+    //   | type_id { Pat.construct ~loc:(symbol_rloc dyp) $1 [] }
+    //   | lbrack patterns [comma ELLIPSIS any_or_var_pat {$3}]? rbrack { Pat.list ~loc:(symbol_rloc dyp) $2 $3 }
+    //   | lbrack [ELLIPSIS any_or_var_pat {$2}]? rbrack { Pat.list ~loc:(symbol_rloc dyp) [] $2 }
 
     //
     // Import declarations
@@ -68,6 +110,25 @@ module.exports = grammar({
     ),
 
     //
+    // Assignments
+    //
+
+    let_expr: $ => seq(
+      'let',
+      optional('rec'),
+      optional('mut'),
+      $._value_binds,
+    ),
+
+    _value_binds: $ => commaSep1(
+      seq(
+        $.pattern,
+        '=',
+        $.expression,
+      )
+    ),
+
+    //
     // Primitives
     //
 
@@ -77,23 +138,38 @@ module.exports = grammar({
       return token(seq(alpha, repeat(alphanumeric)))
     },
 
-    string: $ => choice(
-      seq(
-        '"',
-        repeat(choice(
-          token.immediate(prec(1, /[^"\\]+/)),
-          $.escape_sequence
-        )),
-        '"'
-      ),
-      seq(
-        "'",
-        repeat(choice(
-          token.immediate(prec(1, /[^'\\]+/)),
-          $.escape_sequence
-        )),
-        "'"
+    true: $ => 'true',
+    false: $ => 'false',
+
+    number: $ => {
+      const decimal_digits = /\d+/
+
+      const decimal_literal = choice(
+        seq(decimal_digits),
+        seq(decimal_digits, '.', optional(decimal_digits)),
       )
+
+      return token(choice(
+        decimal_literal,
+      ))
+    },
+
+    string: $ => seq(
+      '"',
+      repeat(choice(
+        token.immediate(prec(1, /[^"\\]+/)),
+        $.escape_sequence
+      )),
+      '"'
+    ),
+
+    char: $ => seq(
+      "'",
+      choice(
+        token.immediate(prec(1, /[^'\\]+/)),
+        $.escape_sequence
+      ),
+      "'"
     ),
 
     escape_sequence: $ => token.immediate(seq(
@@ -106,6 +182,7 @@ module.exports = grammar({
         /u{[0-9a-fA-F]+}/
       )
     )),
+
   }
 })
 

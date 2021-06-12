@@ -1,5 +1,20 @@
 [
   {
+    "type": "char",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "escape_sequence",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import_clause",
     "named": true,
     "fields": {},
@@ -75,6 +90,45 @@
     }
   },
   {
+    "type": "let_expr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "named_imports",
     "named": true,
     "fields": {},
@@ -90,6 +144,21 @@
     }
   },
   {
+    "type": "pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "program",
     "named": true,
     "fields": {},
@@ -99,6 +168,10 @@
       "types": [
         {
           "type": "import_statement",
+          "named": true
+        },
+        {
+          "type": "let_expr",
           "named": true
         }
       ]
@@ -128,7 +201,19 @@
     "named": false
   },
   {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {
@@ -137,6 +222,10 @@
   },
   {
     "type": "escape_sequence",
+    "named": true
+  },
+  {
+    "type": "false",
     "named": true
   },
   {
@@ -152,7 +241,27 @@
     "named": false
   },
   {
+    "type": "let",
+    "named": false
+  },
+  {
+    "type": "mut",
+    "named": false
+  },
+  {
     "type": "namespace_import",
+    "named": true
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "rec",
+    "named": false
+  },
+  {
+    "type": "true",
     "named": true
   },
   {

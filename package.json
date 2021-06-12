@@ -14,5 +14,17 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.19.5"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.gr",
+      "file-types": [
+        "gr"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "injection-regex": "^(gr|grain)$"
+    }
+  ]
 }

@@ -32,3 +32,26 @@ import defaultMember, { member1, member2 as alias2 } from "module-name"
       (import_specifier (identifier))
       (import_specifier (identifier) (identifier)))) (string))
 )
+
+============================================
+Assignments
+============================================
+
+let x = true
+let firstNumber = 3, secondNumber = 4
+let (name, age, color) = user
+let (_, age, _) = user
+let mut y = 'c'
+let rec mut fn = "string"
+
+----
+
+(program
+  (let_expr (pattern (identifier)) (true))
+  (let_expr (pattern (identifier)) (number)
+            (pattern (identifier)) (number))
+  (let_expr (pattern (identifier) (identifier) (identifier)) (identifier))
+  (let_expr (pattern (identifier) (identifier) (identifier)) (identifier))
+  (let_expr (pattern (identifier)) (char))
+  (let_expr (pattern (identifier)) (string))
+)
