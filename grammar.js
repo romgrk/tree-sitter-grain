@@ -149,8 +149,11 @@ module.exports = grammar({
         seq(decimal_digits, '.', optional(decimal_digits)),
       )
 
+      const bigint_literal = seq(decimal_digits, 'n')
+
       return token(choice(
         decimal_literal,
+        bigint_literal,
       ))
     },
 
