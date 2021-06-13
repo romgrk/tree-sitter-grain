@@ -86,3 +86,34 @@ let Some(x) = option
   (let_expr (array_pattern (identifier) (identifier) (underscore)) (identifier))
   (let_expr (construct_pattern (type) (identifier)) (identifier))
 )
+
+============================================
+Binary expressions
+============================================
+
+let x = y + 10
+let x = y + 10 * 10
+let fn = (x) => 10 * 5
+
+----
+
+(program
+  (let_expr (identifier)
+    (binary_expr (identifier) (number)))
+  (let_expr (identifier)
+    (binary_expr
+      (identifier)
+      (binary_expr
+        (number)
+        (number))))
+  (let_expr (identifier)
+    (lambda_expr
+      (identifier)
+      (block_or_expression
+        (binary_expr
+          (number)
+          (number)))
+    )
+  )
+)
+
