@@ -101,9 +101,14 @@ module.exports = grammar({
 
     list_pattern: $ => seq(
       '[',
-      commaSep($.pattern),
+      choice(
+        seq(commaSep($.pattern), optional(seq(',', $.list_pattern_rest))),
+        optional($.list_pattern_rest),
+      ),
       ']',
     ),
+
+    list_pattern_rest: $ => seq('...', $._identifier_or_underscore),
 
     record_pattern: $ => seq(
       '{',
@@ -130,6 +135,7 @@ module.exports = grammar({
     ),
 
     underscore: $ => token('_'),
+    _identifier_or_underscore: $ => choice($.identifier, $.underscore),
 
     //
     // Import declarations

@@ -59,6 +59,8 @@ Let expression (complex patterns)
 let (name, age, _) = tuple
 let { x, y: someName, z: _ } = record
 let [one, two, _] = list
+let [hd, ...tl] = list
+let [...all] = list
 let [> one, two, _] = array
 let Some(x) = option
 
@@ -73,6 +75,14 @@ let Some(x) = option
       (pattern_alias (identifier) (underscore)))
     (identifier))
   (let_expr (list_pattern (identifier) (identifier) (underscore)) (identifier))
+  (let_expr
+    (list_pattern
+      (identifier)
+      (list_pattern_rest (identifier)))
+    (identifier))
+  (let_expr
+    (list_pattern (list_pattern_rest (identifier)))
+    (identifier))
   (let_expr (array_pattern (identifier) (identifier) (underscore)) (identifier))
   (let_expr (construct_pattern (type) (identifier)) (identifier))
 )
