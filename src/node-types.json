@@ -396,6 +396,52 @@
     }
   },
   {
+    "type": "export_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "foreign_statement",
+          "named": true
+        },
+        {
+          "type": "let_expr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "foreign_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "typing",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import_clause",
     "named": true,
     "fields": {},
@@ -450,7 +496,7 @@
     "fields": {
       "source": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "string",
@@ -463,6 +509,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "foreign_statement",
+          "named": true
+        },
         {
           "type": "import_clause",
           "named": true
@@ -801,6 +851,10 @@
       "required": false,
       "types": [
         {
+          "type": "export_statement",
+          "named": true
+        },
+        {
           "type": "import_statement",
           "named": true
         },
@@ -957,6 +1011,11 @@
     }
   },
   {
+    "type": "typing",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "!=",
     "named": false
   },
@@ -1061,6 +1120,10 @@
     "named": false
   },
   {
+    "type": "TODO",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -1081,6 +1144,10 @@
     "named": false
   },
   {
+    "type": "attribute",
+    "named": true
+  },
+  {
     "type": "comment",
     "named": true
   },
@@ -1089,8 +1156,16 @@
     "named": true
   },
   {
+    "type": "export",
+    "named": false
+  },
+  {
     "type": "false",
     "named": true
+  },
+  {
+    "type": "foreign",
+    "named": false
   },
   {
     "type": "from",
@@ -1143,6 +1218,10 @@
   {
     "type": "void",
     "named": true
+  },
+  {
+    "type": "wasm",
+    "named": false
   },
   {
     "type": "{",

@@ -1,7 +1,18 @@
+; Types
+;------
+
+((identifier) @type
+  (#match? @type "^[A-Z]"))
+
 ; Variables
 ;----------
 
 (identifier) @variable
+
+; Attributes
+;----------
+
+(attribute) @function.special
 
 ; Literals
 ;---------
@@ -89,6 +100,7 @@
 
 [
  "import"
+ "export"
  "from"
  "let"
  "rec"

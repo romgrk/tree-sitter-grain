@@ -8,6 +8,8 @@ import { member } from "module-name"
 import { member1 , member2 } from "module-name"
 import { member1 , member2 as alias2 } from "module-name"
 import defaultMember, { member1, member2 as alias2 } from "module-name"
+import foreign wasm fn_name : TODO from "module-name"
+import foreign wasm fn_name as aliasName : TODO from "module-name"
 
 ----
 
@@ -31,6 +33,28 @@ import defaultMember, { member1, member2 as alias2 } from "module-name"
     (import_clause (identifier) (named_imports
       (import_specifier (identifier))
       (import_specifier (identifier) (identifier)))) (string))
+  (import_statement
+    (foreign_statement (identifier) (typing) (string)))
+  (import_statement
+    (foreign_statement (identifier) (typing) (identifier) (string)))
+)
+
+============================================
+Exports
+============================================
+
+@attribute
+export let a = 42
+export foreign wasm fn_name : TODO from "string"
+
+----
+
+(program
+  (export_statement
+    (attribute)
+    (let_expr (identifier) (number)))
+  (export_statement
+    (foreign_statement (identifier) (typing) (string)))
 )
 
 ============================================
